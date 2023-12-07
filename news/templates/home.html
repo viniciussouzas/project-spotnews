@@ -12,19 +12,20 @@
 {% block content %}
     <header class="header">
         <ul class="header-links">
-            {% for new in news %}
-                <li>
-                    <h2 class="news-title">{{ new.title }}</h2>
-                    <span class="news-date">{{ new.created_at|date:"d/m/Y" }}</span>
-                    {% if new.image %}
-                        <img src="{% static new.image.url %}" alt="{{ new.title }}">
-                    {% endif %}S
-                    <!-- <a href="{{ new.get_absolute_url }}">{{ new.title }}</a> -->
-                </li>
-            {% endfor %}
             <li>
                 <a href="{% url 'home-page' %}">Home</a>
             </li>
+            {% for new in news %}
+                <li>
+                    <a href="{% url 'news-details-page' new.id %}">
+                        <h2 class="news-title">{{ new.title }}</h2>
+                        <span class="news-date">{{ new.created_at|date:"d/m/Y" }}</span>
+                        {% if new.image %}
+                            <img src="{% static new.image.url %}" alt="{{ new.title }}">
+                        {% endif %}
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </header>
 {% endblock %}

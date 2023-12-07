@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %}
+    Página de Detalhes da Notícia
+{% endblock %}
+
+{% block content %}
+    <header class="header">
+        <ul class="header-links">
+            <li>
+                <h1 class="news-title">{{ new.title }}</h1>
+                <p class="news-content">{{ new.content }}</p>
+                <span class="news-author">{{ new.author }}</span>
+                {% for category in new.categories.all %}
+                    <span class="news-categories">{{ category }}</span>
+                {% endfor %}
+                <span class="news-date">{{ new.created_at|date:"d/m/Y" }}</span>
+                {% if new.image %}
+                    <img src="{% static new.image.url %}" alt="{{ new.title }}">
+                {% endif %}S
+                <a href="{% url 'home-page' %}">Home</a>
+            </li>
+        </ul>
+    </header>
+{% endblock %}
